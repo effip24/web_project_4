@@ -1,0 +1,12 @@
+.button_action_edit {
+  border: 1px solid #fff;
+    background-image: url(../../../images/edit-icon.svg);
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.button_action_edit:hover {
+  opacity: .6;
+}
