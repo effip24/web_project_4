@@ -5,3 +5,10 @@
   align-items: baseline;
   margin: 0 15px 25px 21px;
 }
+
+/* Media Queries */
+@media screen and (max-width:320px) {
+  .place__description {
+    margin-bottom: 31px;
+  }
+}

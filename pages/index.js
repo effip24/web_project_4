@@ -9,14 +9,16 @@ let popupForm = document.querySelector('.popup__form');
 let popUpName = document.querySelector('.popup__input_type_name');
 let popUpOccupation = document.querySelector('.popup__input_type_occupation');
 
-function openEditPopUp() {
-  popupEdit.setAttribute('class', 'popup popup_type_edit popup_opened');
-  popUpName.value = profileName.textContent;
-  popUpOccupation.value = profileOccupation.textContent;
-}
-
-function closeEditPopUp() {
-  popupEdit.setAttribute('class', 'popup popup_type_edit');
+function togglePopUpEdit() {
+  if(popupEdit.classList.contains("popup_opened"))
+  {
+    popupEdit.setAttribute('class', 'popup popup_type_edit');
+  }
+  else{
+    popupEdit.setAttribute('class', 'popup popup_type_edit popup_opened');
+    popUpName.value = profileName.textContent;
+    popUpOccupation.value = profileOccupation.textContent;
+  }
 }
 
 function profileEditFormSubmit(evt) {
@@ -24,9 +26,9 @@ function profileEditFormSubmit(evt) {
 
   profileName.textContent = popUpName.value;
   profileOccupation.textContent = popUpOccupation.value;
-  closeEditPopUp();
+  togglePopUpEdit();
 }
 
-profileEditButton.addEventListener('click', openEditPopUp);
-profileEditExitButton.addEventListener('click', closeEditPopUp);
+profileEditButton.addEventListener('click', togglePopUpEdit);
+profileEditExitButton.addEventListener('click', togglePopUpEdit);
 popupForm.addEventListener('submit', profileEditFormSubmit);
