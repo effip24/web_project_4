@@ -7,7 +7,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
-  line-height: 22px;
+  line-height: 1.22;
   text-align: center;
   color: #FFFFFF;
   transition: opacity .2s linear;
@@ -19,9 +19,7 @@
 /* Media Queries */
 @media screen and (max-width: 768px) {
   .button_action_save {
-    height: 50px;
     font-size: 14px;
-    line-height: 17px;
-    text-align: center;
+    line-height: 1.2;
   }  
 }

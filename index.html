@@ -20,69 +20,70 @@
         <div class="profile__info">
           <div class="profile__name-wrap">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button class="button button_action_edit"></button>
+            <button aria-label="edit" type="button" class="button button_action_edit"></button>
           </div>
           <p class="profile__occupation">Explorer</p>
         </div>
-        <button class="button button_action_add"></button>
+        <button aria-label="add" type="button" class="button button_action_add"></button>
       </section>
       
       <!-- places section -->
       <section class="places">
+        <!-- list of places each list item is a block of place -->
         <ul class="places__list">
           <li class="place">
             <img src="images/yosemite.jpg" alt="picture of Yosemite Valley" class="place__image">
             <div class="place__description">
               <h2 class="place__title">Yosemite Valley</h2>
-              <button class="button button_action_like"></button>
+              <button aria-label="like" type="button" class="button button_action_like"></button>
             </div>
           </li>
           <li class="place">
             <img src="images/lake-louise.png" alt="picture of Lake Louise" class="place__image">
             <div class="place__description">
               <h2 class="place__title">Lake Louise</h2>
-              <button class="button button_action_like"></button>
+              <button aria-label="like" type="button" class="button button_action_like"></button>
             </div>
           </li>
           <li class="place">
             <img src="images/bald-mountains.png" alt="picture of Bald Mountains" class="place__image">
             <div class="place__description">
               <h2 class="place__title">Bald Mountains</h2>
-              <button class="button button_action_like"></button>
+              <button aria-label="like" type="button" class="button button_action_like"></button>
             </div>
           </li>
           <li class="place">
             <img src="images/latemar.png" alt="picture of Latemar" class="place__image">
             <div class="place__description">
               <h2 class="place__title">Latemar</h2>
-              <button class="button button_action_like"></button>
+              <button aria-label="like" type="button" class="button button_action_like"></button>
             </div>
           </li>
           <li class="place">
             <img src="images/vanoise-national.png" alt="picture of Vanoise National" class="place__image">
             <div class="place__description">
               <h2 class="place__title">Vanoise National</h2>
-              <button class="button button_action_like"></button>
+              <button aria-label="like" type="button" class="button button_action_like"></button>
             </div>
           </li>
           <li class="place">
             <img src="images/lago.png" alt="picture of Lago di Braies" class="place__image">
             <div class="place__description">
               <h2 class="place__title">Lago di Braies</h2>
-              <button class="button button_action_like"></button>
+              <button aria-label="like" type="button" class="button button_action_like"></button>
             </div>
           </li>
         </ul>
       </section>
 
       <!-- popup boxes -->
-      <div class="popup popup_window_edit">
+      <div class="popup">
         <div class="popup__container">
-          <button class="button button_action_close-edit"></button>
-          <form action="#" class="popup__form">
+          <button aria-label="close" type="button" class="button button_action_close-edit"></button>
+          <form name="form" action="#" class="popup__form">
             <h2 class="popup__title">Edit profile</h2>
-            <input type="text" placeholder="name" class="popup__input popup__input_type_name">
-            <input type="text" placeholder="About me" class="popup__input popup__input_type_occupation">
+            <input name="name" type="text" placeholder="name" class="popup__input popup__input_type_name">
+            <input name="occupation" type="text" placeholder="About me" class="popup__input popup__input_type_occupation">
             <button class="button button_action_save" type="submit">Save</button>
           </form>
         </div>
@@ -93,6 +94,6 @@
       <p class="footer__author">&copy; 2021 Around The U.S.</p>
     </footer>
   </div>
-<script src="pages/index.js"></script>
+<script src="scripts/index.js"></script>
 </body>
 </html>
