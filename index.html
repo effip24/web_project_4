@@ -20,72 +20,58 @@
         <div class="profile__info">
           <div class="profile__name-wrap">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button aria-label="edit" type="button" class="button button_action_edit"></button>
+            <button aria-label="edit" type="button" class="profile__edit"></button>
           </div>
           <p class="profile__occupation">Explorer</p>
         </div>
-        <button aria-label="add" type="button" class="button button_action_add"></button>
+        <button aria-label="add" type="button" class="profile__add"></button>
       </section>
       
       <!-- places section -->
       <section class="places">
         <!-- list of places each list item is a block of place -->
         <ul class="places__list">
-          <li class="place">
-            <img src="images/yosemite.jpg" alt="picture of Yosemite Valley" class="place__image">
-            <div class="place__description">
-              <h2 class="place__title">Yosemite Valley</h2>
-              <button aria-label="like" type="button" class="button button_action_like"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="images/lake-louise.png" alt="picture of Lake Louise" class="place__image">
-            <div class="place__description">
-              <h2 class="place__title">Lake Louise</h2>
-              <button aria-label="like" type="button" class="button button_action_like"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="images/bald-mountains.png" alt="picture of Bald Mountains" class="place__image">
-            <div class="place__description">
-              <h2 class="place__title">Bald Mountains</h2>
-              <button aria-label="like" type="button" class="button button_action_like"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="images/latemar.png" alt="picture of Latemar" class="place__image">
-            <div class="place__description">
-              <h2 class="place__title">Latemar</h2>
-              <button aria-label="like" type="button" class="button button_action_like"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="images/vanoise-national.png" alt="picture of Vanoise National" class="place__image">
-            <div class="place__description">
-              <h2 class="place__title">Vanoise National</h2>
-              <button aria-label="like" type="button" class="button button_action_like"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="images/lago.png" alt="picture of Lago di Braies" class="place__image">
-            <div class="place__description">
-              <h2 class="place__title">Lago di Braies</h2>
-              <button aria-label="like" type="button" class="button button_action_like"></button>
-            </div>
-          </li>
         </ul>
+        <template id="place">
+          <li class="place">
+            <button class="place__delete"></button>
+            <img src="" alt="" class="place__image">
+            <div class="place__description">
+              <h2 class="place__title"></h2>
+              <button aria-label="like" type="button" class="place__like place__like_theme_unlike"></button>
+            </div>
+          </li>
+        </template>
       </section>
 
       <!-- popup boxes -->
-      <div class="popup">
+      <div class="popup popup_window_edit">
         <div class="popup__container">
-          <button aria-label="close" type="button" class="button button_action_close-edit"></button>
-          <form name="form" action="#" class="popup__form">
+          <button aria-label="close" type="button" class="popup__close"></button>
+          <form name="form" action="#" class="popup__form popup__form_type_edit">
             <h2 class="popup__title">Edit profile</h2>
             <input name="name" type="text" placeholder="name" class="popup__input popup__input_type_name">
             <input name="occupation" type="text" placeholder="About me" class="popup__input popup__input_type_occupation">
-            <button class="button button_action_save" type="submit">Save</button>
+            <button class="button button_action_submit" type="submit">Save</button>
           </form>
+        </div>
+      </div>
+      <div class="popup popup_window_add">
+        <div class="popup__container">
+          <button aria-label="close" type="button" class="popup__close"></button>
+          <form name="form" action="#" class="popup__form popup__form_type_add">
+            <h2 class="popup__title">New place</h2>
+            <input name="title" type="text" placeholder="Title" class="popup__input popup__input_type_title">
+            <input name="link" type="url" placeholder="Image link" class="popup__input popup__input_type_link">
+            <button class="button button_action_submit" type="submit">Create</button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_window_image">
+        <div class="popup__container popup__container_type_image">
+          <button aria-label="close" type="button" class="popup__close popup_close_image"></button>
+          <img src="images/bald-mountains.png" alt="bald" class="popup__image">
+          <p class="popup__description"></p>
         </div>
       </div>
     </main>

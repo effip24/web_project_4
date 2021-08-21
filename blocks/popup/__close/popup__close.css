@@ -1,4 +1,4 @@
-.button_action_close-edit {
+.popup__close {
   position: absolute;
   top: -40px;
   right: -40px;
@@ -10,15 +10,18 @@
   background-image: url(../../../images/plus-icon.svg);
   background-position: center center;
   background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
   transition: opacity .2s linear;
 }
-.button_action_close-edit:hover {
+.popup__close:hover {
   opacity: .6;
 }
 
 /* Media Queries */
 @media screen and (max-width: 768px) {
-  .button_action_close-edit {
+  .popup__close {
     width: 26px;
     height: 26px;
     top: -30px;
