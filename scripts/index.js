@@ -126,7 +126,6 @@ function like(evt) {
 
   /* checking if the button is unliked */
   if(backgroundImageSrc.includes('disabled')) {
-    console.log("here");
     evt.classList.remove('place__like_theme_unlike');
     evt.classList.add('place__like_theme_like');
   }
