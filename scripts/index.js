@@ -6,15 +6,18 @@ const closeButton = document.querySelectorAll('.popup__close');
 const likeButton = document.getElementsByClassName('place__like');
 const imagePlaceButton = document.getElementsByClassName('place__image');
 
-/* popup edit box variables */
+/* Edit popup box variables */
 const popupEdit = document.querySelector('.popup_window_edit');
 const popupEditForm = document.querySelector('.popup__form_type_edit');
 
-/* popup Add box variables */
+/* Add popup box variables */
 const popupAdd = document.querySelector('.popup_window_add');
 const popupAddForm = document.querySelector('.popup__form_type_add');
+
+/* Image popup box */
 const popupImage = document.querySelector('.popup_window_image');
 
+/* the current open popup (if there is one)*/
 let openedPopUp;
 
 /* this function initializes the cards when the page loads */
@@ -73,7 +76,8 @@ function deletePlace(evt) {
 }
  
 /* this function opens popup window
-  parameter evt - a button, the function checks if it's edit add or imaged pressed
+  parameter evt - a button, the function checks if it's 
+  edit add or imaged pressed button and opens the right popup box
 */ 
 function openPopUp(evt) {
   /* checking if the pressed button opens the edit popup */
@@ -106,7 +110,7 @@ function openPopUp(evt) {
   }
 } 
 
-/* this function closes the edit box popup */ 
+/* this function closes the the current opened popup box */ 
 function closePopUp() {
   openedPopUp.classList.remove('popup_opened');
   openedPopUp = "";
