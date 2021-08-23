@@ -71,19 +71,22 @@ function initialPlaces() {
 */
 function createPlace(placeTitle, placeLink) {
   const place = placeTemplate.querySelector('.place').cloneNode(true);
+  const deletePlaceButton = place.querySelector('.place__delete');
+  const likePlaceButton = place.querySelector('.place__like');
+  const imageOpenButton = place.querySelector('.place__image');
 
   place.querySelector('.place__title').textContent = placeTitle;
   place.querySelector(".place__image").src = placeLink;
   place.querySelector(".place__image").alt = "picture of " + placeTitle;
   
   /* setting listeners to the delete, like and image buttons of the new place */
-  place.querySelector('.place__delete').addEventListener('click', (evt) => {
+  deletePlaceButton.addEventListener('click', (evt) => {
     deletePlace(evt);
   });
-  place.querySelector('.place__like').addEventListener('click', (evt) => {
+  likePlaceButton.addEventListener('click', (evt) => {
     likePlace(evt);
   });
-  place.querySelector('.place__image').addEventListener('click', (evt) => {
+  imageOpenButton.addEventListener('click', (evt) => {
     imagePopUp(evt);
   });
   return place;
@@ -124,8 +127,8 @@ function addPopUp() {
 */
 function imagePopUp(img) {
   openPopUp(imagePopup);
-  let src = img.target.src;
-  let title = img.target.closest('.place').querySelector('.place__title');
+  const src = img.target.src;
+  const title = img.target.closest('.place').querySelector('.place__title');
   image.src = src;
   description.textContent = title.textContent;
 }
@@ -149,19 +152,8 @@ function closePopUp() {
   if the button is liked the button changes to emty heart theme
 */
 function likePlace(evt) {
-  let compStyles = window.getComputedStyle(evt.target);
-  let backgroundImageSrc = compStyles.getPropertyValue('background-image');
-
-  /* checking if the place is unliked */
-  if(backgroundImageSrc.includes('disabled')) {
-    evt.target.classList.remove('place__like_theme_unlike');
-    evt.target.classList.add('place__like_theme_like');
-  }
-  /* if the place is liked */
-  else {
-    evt.target.classList.remove('place__like_theme_like');
-    evt.target.classList.add('place__like_theme_unlike');
-  }
+  evt.target.classList.toggle('place__like_theme_like');
+  evt.target.classList.toggle('place__like_theme_unlike');
 }
 
 /* edit form submit handler */
