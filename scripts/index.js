@@ -71,22 +71,19 @@ function initialPlaces() {
 */
 function createPlace(placeTitle, placeLink) {
   const place = placeTemplate.querySelector('.place').cloneNode(true);
-  const deletePlaceButton = place.querySelector('.place__delete');
-  const likePlaceButton = place.querySelector('.place__like');
-  const imageOpenButton = place.querySelector('.place__image');
 
   place.querySelector('.place__title').textContent = placeTitle;
   place.querySelector(".place__image").src = placeLink;
   place.querySelector(".place__image").alt = "picture of " + placeTitle;
   
   /* setting listeners to the delete, like and image buttons of the new place */
-  deletePlaceButton.addEventListener('click', (evt) => {
+  place.querySelector('.place__delete').addEventListener('click', (evt) => {
     deletePlace(evt);
   });
-  likePlaceButton.addEventListener('click', (evt) => {
+  place.querySelector('.place__like').addEventListener('click', (evt) => {
     likePlace(evt);
   });
-  imageOpenButton.addEventListener('click', (evt) => {
+  place.querySelector('.place__image').addEventListener('click', (evt) => {
     imagePopUp(evt);
   });
   return place;
