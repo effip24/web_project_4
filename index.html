@@ -45,29 +45,33 @@
       </section>
 
       <!-- popup boxes -->
-      <div class="popup popup_window_edit">
+      <div class="popup popup_window_edit" name="edit">
         <div class="popup__container">
           <button aria-label="close" type="button" class="popup__close"></button>
-          <form name="form" action="#" class="popup__form">
+          <form name="edit" action="#" class="popup__form">
             <h2 class="popup__title">Edit profile</h2>
-            <input name="name" type="text" placeholder="name" class="popup__input popup__input_type_name">
-            <input name="occupation" type="text" placeholder="About me" class="popup__input popup__input_type_occupation">
+            <input id="name-input" required minlength="2" maxlength="40" name="name" type="text" placeholder="name" class="popup__input popup__input_type_name">
+            <span id="name-input-error" class="popup__input-error"></span>
+            <input id="occupation-input" required minlength="2" maxlength="200" name="occupation" type="text" placeholder="About me" class="popup__input popup__input_type_occupation">
+            <span id="occupation-input-error" class="popup__input-error"></span>
             <button class="popup__submit" type="submit">Save</button>
           </form>
         </div>
       </div>
-      <div class="popup popup_window_add">
+      <div class="popup popup_window_add" name="add">
         <div class="popup__container">
           <button aria-label="close" type="button" class="popup__close"></button>
-          <form name="form" action="#" class="popup__form">
+          <form name="add" action="#" class="popup__form">
             <h2 class="popup__title">New place</h2>
-            <input name="title" type="text" placeholder="Title" class="popup__input popup__input_type_title">
-            <input name="link" type="url" placeholder="Image link" class="popup__input popup__input_type_link">
-            <button class="popup__submit" type="submit">Create</button>
+            <input id="title-input" required minlength="1" maxlength="30" name="title" type="text" placeholder="Title" class="popup__input popup__input_type_title">
+            <span id="title-input-error" class="popup__input-error"></span>
+            <input id="link-input" required name="link" type="url" placeholder="Image link" class="popup__input popup__input_type_link">
+            <span id="link-input-error" class="popup__input-error"></span>
+            <button class="popup__submit popup__submit_inactive" type="submit">Create</button>
           </form>
         </div>
       </div>
-      <div class="popup popup_window_image">
+      <div class="popup popup_window_image" name="image">
         <div class="popup__container popup__container_type_image">
           <button aria-label="close" type="button" class="popup__close popup__close_image"></button>
           <img src="images/bald-mountains.png" alt="bald" class="popup__image">
@@ -80,6 +84,7 @@
       <p class="footer__author">&copy; 2021 Around The U.S.</p>
     </footer>
   </div>
-<script src="scripts/index.js"></script>
+<script type="module" src="scripts/index.js"></script>
+<script type="module" src="scripts/validate.js"></script>
 </body>
 </html>

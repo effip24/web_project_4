@@ -5,4 +5,8 @@
   object-position: center center;
   border-radius: 10px 10px 0 0;
   cursor: pointer;
+  transition: opacity .2s linear;
+}
+.place__image:hover {
+  opacity: 0.8;
 }

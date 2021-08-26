@@ -1,7 +1,9 @@
+import resetFormValidation from '../scripts/validate.js'
 
 /* profile variables */
-const profileName = document.querySelector('.profile__name'); 
-const profileOccupation = document.querySelector('.profile__occupation');
+const profile = document.querySelector('.profile');
+const profileName = profile.querySelector('.profile__name'); 
+const profileOccupation = profile.querySelector('.profile__occupation');
 
 /* place variables */
 const placesList = document.querySelector('.places__list');
@@ -36,26 +38,24 @@ const places = [
 /* edit popup variables */
 const editPopup = document.querySelector('.popup_window_edit');
 const editPopupForm = editPopup.querySelector('.popup__form');
-const editPopupName = document.querySelector('.popup__input_type_name'); 
-const editPopupOccupation = document.querySelector('.popup__input_type_occupation');
+const editPopupName = editPopup.querySelector('.popup__input_type_name'); 
+const editPopupOccupation = editPopup.querySelector('.popup__input_type_occupation');
 
 /* add popup variables */
 const addPopup = document.querySelector('.popup_window_add');
 const addPopupForm = addPopup.querySelector('.popup__form');
-const addPopupTitle = document.querySelector('.popup__input_type_title');
-const addPopupLink = document.querySelector('.popup__input_type_link');
+const addPopupTitle = addPopup.querySelector('.popup__input_type_title');
+const addPopupLink = addPopup.querySelector('.popup__input_type_link');
 
 /* image popup variables */
 const imagePopup = document.querySelector('.popup_window_image');
 const image = imagePopup.querySelector('.popup__image');
 const description = imagePopup.querySelector('.popup__description');
 
-/* Buttons */
-const profileEditButton = document.querySelector('.profile__edit'); 
-const addPlaceButton = document.querySelector('.profile__add');
-const closeButtons = document.querySelectorAll('.popup__close');
+/* list of all popups */
+const popups = document.querySelectorAll('.popup');
 
-/* the current open popup (if there is one)*/
+/* the current opened popup (if there is one)*/
 let openedPopUp;
 
 /* this function initializes the cards when the page loads */
@@ -71,23 +71,15 @@ function initialPlaces() {
 */
 function createPlace(placeTitle, placeLink) {
   const place = placeTemplate.querySelector('.place').cloneNode(true);
-  const deletePlaceButton = place.querySelector('.place__delete');
-  const likePlaceButton = place.querySelector('.place__like');
-  const imageOpenButton = place.querySelector('.place__image');
-
   place.querySelector('.place__title').textContent = placeTitle;
   place.querySelector(".place__image").src = placeLink;
   place.querySelector(".place__image").alt = "picture of " + placeTitle;
   
   /* setting listeners to the delete, like and image buttons of the new place */
-  deletePlaceButton.addEventListener('click', (evt) => {
-    deletePlace(evt);
-  });
-  likePlaceButton.addEventListener('click', (evt) => {
-    likePlace(evt);
-  });
-  imageOpenButton.addEventListener('click', (evt) => {
-    imagePopUp(evt);
+  place.addEventListener('click', (evt) => {
+    if(evt.target.classList.contains('place__delete'))deletePlace(evt);
+    else if(evt.target.classList.contains('place__like'))likePlace(evt);
+    else if(evt.target.classList.contains('place__image'))imagePopUp(evt);
   });
   return place;
 }
@@ -177,11 +169,28 @@ function addFormHandler(evt) {
 /* initializing the startup places */
 initialPlaces();
 
-/* buttons listeners */
-profileEditButton.addEventListener('click', editPopUp);
-addPlaceButton.addEventListener('click', addPopUp);
-closeButtons.forEach(item => {
-  item.addEventListener('click', closePopUp)
+/* profile buttons listeners */
+profile.addEventListener('click', function(evt){
+  if(evt.target.classList.contains('profile__edit'))editPopUp();
+  else if(evt.target.classList.contains('profile__add'))addPopUp();
+});
+
+/* popups close buttons listeners */
+popups.forEach((popup) => {
+  popup.addEventListener('click', function(evt) {
+    /* if the user clicks on closing button */
+    if(evt.target.classList.contains('popup__close'))
+      {
+        closePopUp();
+        resetFormValidation(popup);
+      }
+    /* if the user clicks outside the popup container */
+    else if(!evt.target.classList.contains('popup__container') && evt.target.classList.contains('popup'))
+    {
+      closePopUp();
+      resetFormValidation(popup);
+    }
+  });
 });
 
 /* form listeners */
