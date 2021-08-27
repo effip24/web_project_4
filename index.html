@@ -50,9 +50,9 @@
           <button aria-label="close" type="button" class="popup__close"></button>
           <form name="edit" action="#" class="popup__form">
             <h2 class="popup__title">Edit profile</h2>
-            <input id="name-input" required minlength="2" maxlength="40" name="name" type="text" placeholder="name" class="popup__input popup__input_type_name">
+            <input id="name-input" novalidate required minlength="2" maxlength="40" name="name" type="text" placeholder="name" class="popup__input popup__input_type_name">
             <span id="name-input-error" class="popup__input-error"></span>
-            <input id="occupation-input" required minlength="2" maxlength="200" name="occupation" type="text" placeholder="About me" class="popup__input popup__input_type_occupation">
+            <input id="occupation-input" novalidate required minlength="2" maxlength="200" name="occupation" type="text" placeholder="About me" class="popup__input popup__input_type_occupation">
             <span id="occupation-input-error" class="popup__input-error"></span>
             <button class="popup__submit" type="submit">Save</button>
           </form>
@@ -63,11 +63,11 @@
           <button aria-label="close" type="button" class="popup__close"></button>
           <form name="add" action="#" class="popup__form">
             <h2 class="popup__title">New place</h2>
-            <input id="title-input" required minlength="1" maxlength="30" name="title" type="text" placeholder="Title" class="popup__input popup__input_type_title">
+            <input id="title-input" novalidate required minlength="1" maxlength="30" name="title" type="text" placeholder="Title" class="popup__input popup__input_type_title">
             <span id="title-input-error" class="popup__input-error"></span>
-            <input id="link-input" required name="link" type="url" placeholder="Image link" class="popup__input popup__input_type_link">
+            <input id="link-input" novalidate required name="link" type="url" placeholder="Image link" class="popup__input popup__input_type_link">
             <span id="link-input-error" class="popup__input-error"></span>
-            <button class="popup__submit popup__submit_inactive" type="submit">Create</button>
+            <button class="popup__submit" type="submit">Create</button>
           </form>
         </div>
       </div>

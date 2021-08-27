@@ -7,6 +7,7 @@ parameter settings - object contains all classes for querySelectors.
 function showInputError(formElement, inputElement, errorMessage, settings) {
   // getting the errorElement from HTML.
   const errorElement = getErrorElement(formElement, inputElement);
+  inputElement.classList.add(settings.inputError);
   // set the error message to the user.
   errorElement.textContent = errorMessage;
   // display the error message to the user.
@@ -122,6 +123,7 @@ export default function resetFormValidation(form) {
   inputList.forEach((inputElement => {
     // the error element of a given input field.
     const errorElement = getErrorElement(form, inputElement);
+    inputElement.classList.remove('popup__input_type_error')
     // removing the current error message.
     errorElement.textContent = '';
   }));
@@ -132,5 +134,6 @@ enableValidation({
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit",
   inactiveButtonClass: "popup__submit_inactive",
+  inputError: "popup__input_type_error",
   errorClass: "popup__input-error_active"
 }); 
