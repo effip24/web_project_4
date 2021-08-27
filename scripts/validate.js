@@ -119,6 +119,8 @@ parameter form - the form to reset the error message in.
 export default function resetFormValidation(form) {
   // contains a list of input fields of a from.
   const inputList = form.querySelectorAll('.popup__input');
+  // the submit button of the given form.
+  const submit = form.querySelector('.popup__submit');
   // iterating through the list.
   inputList.forEach((inputElement => {
     // the error element of a given input field.
@@ -126,6 +128,8 @@ export default function resetFormValidation(form) {
     inputElement.classList.remove('popup__input_type_error')
     // removing the current error message.
     errorElement.textContent = '';
+    // reseting the submit button of the given form.
+    submit.classList.add('popup__submit_inactive');
   }));
 }
 
