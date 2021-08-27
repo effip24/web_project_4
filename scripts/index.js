@@ -175,7 +175,6 @@ function editFormHnadler(evt) {
 function addFormHandler(evt) {
   evt.preventDefault(); 
   addPlace(addPopupTitle.value, addPopupLink.value);
-  addPlaceToLocalStorage(addPopupTitle.value, addPopupLink.value);
   closePopUp(); 
 }
 
