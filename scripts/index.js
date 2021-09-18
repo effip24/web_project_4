@@ -46,6 +46,7 @@ const addPopup = document.querySelector('.popup_window_add');
 const addPopupForm = addPopup.querySelector('.popup__form');
 const addPopupTitle = addPopup.querySelector('.popup__input_type_title');
 const addPopupLink = addPopup.querySelector('.popup__input_type_link');
+const addPopupSubmit = addPopup.querySelector('.popup__submit');
 
 /* image popup variables. */
 const imagePopup = document.querySelector('.popup_window_image');
@@ -111,6 +112,8 @@ function addPopUp() {
   // removes any previous added data.
   addPopupTitle.value = "";
   addPopupLink.value = "";
+  // disable the submit button (input fieldds are empty).
+  addPopupSubmit.classList.add('popup__submit_inactive');
 }
 
 /* this function handles the opening of the image popup 

@@ -22,10 +22,12 @@ parameter settings - object contains all the necessary classes.
 function hideInputError(formElement, inputElement, settings) {
   // getting the errorElement from HTML.
   const errorElement = getErrorElement(formElement, inputElement);
-   // remove the error message to the user.
-   errorElement.classList.remove(settings.errorClass);
-   // clear the error message.
-   errorElement.textContent = "";
+  // removing the error highlight from input
+  inputElement.classList.remove(settings.inputError);
+  // remove the error message to the user.
+  errorElement.classList.remove(settings.errorClass);
+  // clear the error message.
+  errorElement.textContent = "";
 }
 
 /* this function returns an error element which the error will be displayed in
