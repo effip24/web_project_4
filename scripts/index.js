@@ -1,101 +1,79 @@
-import resetFormValidation from '../scripts/validate.js'
+import Card from '../scripts/Card.js';
+import FormValidator from '../scripts/FormValidator.js';
 
-/* profile variables. */
+const cardSelectors = {
+  card: 'place',
+  list: 'places__list'
+}
+
+const formSetting = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_inactive",
+  inputError: "popup__input_type_error",
+  errorClass: "popup__input-error_active"
+}
+
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name'); 
 const profileOccupation = profile.querySelector('.profile__occupation');
 
-/* place variables. */
 const placesList = document.querySelector('.places__list');
-const placeTemplate = document.querySelector('#place').content;
 const places = [
   {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+    title: "Yosemite Valley",
+    src: "https://code.s3.yandex.net/web-code/yosemite.jpg"
   },
   {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+    title: "Lake Louise",
+    src: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
   },
   {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+    title: "Bald Mountains",
+    src: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
   },
   {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+    title: "Latemar",
+    src: "https://code.s3.yandex.net/web-code/latemar.jpg"
   },
   {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+    title: "Vanoise National Park",
+    src: "https://code.s3.yandex.net/web-code/vanoise.jpg"
   },
   {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+    title: "Lago di Braies",
+    src: "https://code.s3.yandex.net/web-code/lago.jpg"
   }
 ];
 
-/* edit popup variables. */
+const popups = document.querySelectorAll('.popup');
+
 const editPopup = document.querySelector('.popup_window_edit');
 const editPopupForm = editPopup.querySelector('.popup__form');
+const editFormValidator = new FormValidator(formSetting, editPopupForm);
 const editPopupName = editPopup.querySelector('.popup__input_type_name'); 
 const editPopupOccupation = editPopup.querySelector('.popup__input_type_occupation');
 
-/* add popup variables. */
 const addPopup = document.querySelector('.popup_window_add');
 const addPopupForm = addPopup.querySelector('.popup__form');
+const addFromValidator = new FormValidator(formSetting, addPopupForm);
 const addPopupTitle = addPopup.querySelector('.popup__input_type_title');
 const addPopupLink = addPopup.querySelector('.popup__input_type_link');
 const addPopupSubmit = addPopup.querySelector('.popup__submit');
 
-/* image popup variables. */
 const imagePopup = document.querySelector('.popup_window_image');
 const image = imagePopup.querySelector('.popup__image');
 const description = imagePopup.querySelector('.popup__description');
 
-/* list of all popups. */
-const popups = document.querySelectorAll('.popup');
-
-/* the current opened popup (if there is one). */
 let openedPopUp;
 
 /* this function initializes the cards when the page loads. */
 function initialPlaces() {
-  places.forEach((placeItem) => {
-    addPlace(placeItem.name, placeItem.link);
+  places.forEach((data) => {
+    const card = new Card(data, cardSelectors);
+    card.generateCard();
   });
-}
-
-/* this function creates a new place.
-  parameter placeTitle - contains the name of the new place.
-  parameter placeLink - contains the link of the new place.
-*/
-function createPlace(placeTitle, placeLink) {
-  const place = placeTemplate.querySelector('.place').cloneNode(true);
-  place.querySelector('.place__title').textContent = placeTitle;
-  place.querySelector(".place__image").src = placeLink;
-  place.querySelector(".place__image").alt = "picture of " + placeTitle;
-  // setting listeners to the delete, like and image buttons of the new place. 
-  place.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('place__delete'))deletePlace(evt);
-    else if(evt.target.classList.contains('place__like'))likePlace(evt);
-    else if(evt.target.classList.contains('place__image'))imagePopUp(evt);
-  });
-  return place;
-}
-
-/* this function adds a new place to places list. */
-function addPlace(placeTitle, placeLink) {
-  const place = createPlace(placeTitle, placeLink);
-  placesList.prepend(place);
-}
-
-/* this function deletes a given place from the places list 
-  parameter evt - the place to be deleted.
-*/
-function deletePlace(evt) {
-  const place = evt.target.closest('.place');
-  place.remove();
 }
 
 /* this function handles the opening of the edit popup. */
@@ -116,9 +94,7 @@ function addPopUp() {
   addPopupSubmit.classList.add('popup__submit_inactive');
 }
 
-/* this function handles the opening of the image popup 
-  parameter img - contains the image to be displayed.
-*/
+/* this function handles the opening of the image popup */
 function imagePopUp(img) {
   openPopUp(imagePopup);
   const src = img.target.src;
@@ -127,18 +103,17 @@ function imagePopUp(img) {
   description.textContent = title.textContent;
 }
  
-/* this function a given popup window
-parameter popup - the popup to be opened.
-*/ 
+/* this function opens a given popup window */ 
 function openPopUp(popup) {
-  resetFormValidation(popup);
+  addFromValidator.resetFormValidation();
+  editFormValidator.resetFormValidation();
   popup.classList.add('popup_opened');
   openedPopUp = popup;
   // setting event listener to Esc key.
   document.addEventListener('keydown', esc);
 } 
 
-/* this function closes the the current opened popup box */ 
+/* this function closes the current opened popup box */ 
 function closePopUp() {
   openedPopUp.classList.remove('popup_opened');
   openedPopUp = "";
@@ -154,15 +129,6 @@ function esc(evt) {
     }
 }
 
-/* this function edits the like button 
-  when the user presses on the like button if the button is unliked the button changes to black heart theme
-  if the button is liked the button changes to emty heart theme.
-*/
-function likePlace(evt) {
-  evt.target.classList.toggle('place__like_theme_like');
-  evt.target.classList.toggle('place__like_theme_unlike');
-}
-
 /* edit form submit handler */
 function editFormHnadler(evt) { 
   evt.preventDefault(); 
@@ -176,19 +142,34 @@ function editFormHnadler(evt) {
 
 /* add form submit handler */
 function addFormHandler(evt) {
-  evt.preventDefault(); 
-  addPlace(addPopupTitle.value, addPopupLink.value);
+  const data = {
+    title: addPopupTitle.value,
+    src: addPopupLink.value,
+  };
+  
+  const card = new Card(data, cardSelectors);
+  card.generateCard();
+  evt.preventDefault();
+  
   closePopUp(); 
 }
 
 /* initializing the startup places */
 initialPlaces();
 
+editFormValidator.enableValidation();
+addFromValidator.enableValidation();
+
 /* profile buttons listeners */
 profile.addEventListener('click', function(evt){
   if(evt.target.classList.contains('profile__edit'))editPopUp();
   else if(evt.target.classList.contains('profile__add'))addPopUp();
 });
+
+/* cards images listeners */
+placesList.addEventListener('click', (evt) => {
+  if(evt.target.classList.contains('place__image')) imagePopUp(evt);
+})
 
 /* popups close buttons listeners */
 popups.forEach((popup) => {
