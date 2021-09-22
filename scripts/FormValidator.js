@@ -1,6 +1,9 @@
 export default class FormValidator {
-
-  /* constructor of FormValidator class */
+  /** constructor of FormValidator class
+   * @constructor
+   * @param {object} settings - stores selectors and form classes.
+   * @param {element} formElement - the form elemnt to be validated.
+   */
   constructor(settings, formElement) {
     this._formSelector = settings.formSelector;
     this._inputSelector = settings.inputSelector;
@@ -11,12 +14,14 @@ export default class FormValidator {
     this._formElement = formElement;
   }
 
-  /* this function starts a form validation. */
+  /** this function starts a form validation. */
   enableValidation() {
     this._setEventListeners();
-  } 
+  }
 
-  /* this function shows an input error message. */
+  /** this function shows an error message.
+   * @param inputElement - the input element that has an error.
+   */
   _showInputError(inputElement) {
     // getting the errorElement from HTML.
     const errorElement = this._getErrorElement(inputElement);
@@ -27,7 +32,9 @@ export default class FormValidator {
     errorElement.classList.add(this._errorClass);
   }
 
-  /* this function hides an input error message. */
+  /** this function hides an error message.
+   * @param inputElement - the input element that has an error.
+   */
   _hideInputError(inputElement) {
     // getting the errorElement from HTML.
     const errorElement = this._getErrorElement(inputElement);
@@ -39,13 +46,17 @@ export default class FormValidator {
     errorElement.textContent = "";
   }
 
-  /* this function returns an error element which an error message will be displayed in */
+  /** this function returns an error element which an error message will be displayed in.
+   * @param inputElement - the input element that has an error.
+   */
   _getErrorElement(inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     return errorElement;
   }
 
-  /* this function checks if a given input field is valid */
+  /** this function checks if a given input field is valid.
+   * @param inputElement - the input to be checked.
+   */
   _isValid(inputElement) {
     // checking if the current input is now invalid.
     if (!inputElement.validity.valid) {
@@ -55,18 +66,23 @@ export default class FormValidator {
     }
   }
 
-  /* this function checks a list of input fields */
+  /** this function checks a list of input fields
+   * @param inputList - the list of input fields to be checked.
+   */
   _hasInvalidInput(inputList) {
     let invalid = false;
     // iterating through the list of input.
     inputList.forEach((inputElement) => {
       // if an input is invalid
       if (!inputElement.validity.valid) invalid = true;
-    })
+    });
     return invalid;
   }
 
-  /* this function enables or disables a form's buttons according to the validity of the form's input fields */
+  /** this function enables or disables a form's buttons according to the validity of the form's input fields
+   * @param inputList - the list of input fields to be checked.
+   * @param buttonElement - the button element to toggle disable or enable state.
+   */
   _toggleButtonState(inputList, buttonElement) {
     // if one of the form's input field is invalid.
     if (this._hasInvalidInput(inputList)) {
@@ -80,11 +96,11 @@ export default class FormValidator {
 
   /* this function installs input event listeners to the form */
   _setEventListeners() {
-    // a list of input field inside formElement 
+    // a list of input field inside formElement
     const inputList = this._formElement.querySelectorAll(this._inputSelector);
     const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
 
-    // iterating through inputList 
+    // iterating through inputList
     inputList.forEach((inputElement) => {
       // setting input listener to each input field in inputList
       inputElement.addEventListener("input", () => {
@@ -97,18 +113,14 @@ export default class FormValidator {
   /* this function resets the input fields of the form  */
   resetFormValidation() {
     // contains a list of input fields of a from.
-    const inputList = this._formElement.querySelectorAll('.popup__input');
+    const inputList = this._formElement.querySelectorAll(this._inputSelector);
     // the submit button of the given form.
-    const submit = this._formElement.querySelector('.popup__submit');
+    const submitButton = this._formElement.querySelector(this._submitButtonSelector);
     // iterating through the list.
-    inputList.forEach((inputElement => {
-      // the error element of a given input field.
-      const errorElement = this._getErrorElement(inputElement);
-      inputElement.classList.remove('popup__input_type_error')
-      // removing the current error message.
-      errorElement.textContent = '';
+    inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
       // reseting the submit button of the given form.
-      submit.classList.add('popup__submit_inactive');
-    }));
+      submitButton.classList.add(this._inactiveButtonClass);
+    });
   }
 }
