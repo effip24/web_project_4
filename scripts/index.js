@@ -132,7 +132,7 @@ const handleKeyDown = (evt) => {
 /** edit form handler
  * @param evt - the element that triggered the event.
  */
-function editFormHnadler(evt) {
+function editFormHadler(evt) {
   evt.preventDefault();
 
   profileName.textContent = editPopupName.value;
@@ -187,5 +187,5 @@ popups.forEach((popup) => {
 });
 
 // form listeners
-editPopupForm.addEventListener("submit", editFormHnadler);
+editPopupForm.addEventListener("submit", editFormHadler);
 addPopupForm.addEventListener("submit", addFormHandler);
