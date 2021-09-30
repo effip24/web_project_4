@@ -3,11 +3,12 @@ export default class Card {
    * @param {object} data - new card data, text and a link to the image.
    * @param {string} cardSelector - the selector of the template elemnt of a card.
    */
-  constructor(data, cardSelector) {
-    this._title = data.title;
-    this._src = data.src;
-    this._alt = "picture of " + data.title;
+  constructor({title, link}, cardSelector, handleCardClick) {
+    this._title = title;
+    this._src = link;
+    this._alt = "picture of " + title;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   /** this function returns new template card */
@@ -37,18 +38,7 @@ export default class Card {
     });
   }
 
-  /** this function contains the logic when a user clicks on any card's button
-   * @param evt - the element that triggered the event.
-   */
-  _handleCardClick(evt) {
-    if (evt.target.classList.contains("place__delete")) {
-      this._deleteCard();
-    } else if (evt.target.classList.contains("place__like")) {
-      this._toggleLikeCard(evt);
-    }
-  }
-
-  /** this function deletes the card from DOM */
+  /** this function deletes a card from DOM */
   _deleteCard() {
     this._card.remove();
     this._card = null;
