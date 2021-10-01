@@ -25,7 +25,7 @@ export default class Popup {
     if (evt.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   /** this function adds a click event listener to the close icon of the popup */
   setEventListeners() {

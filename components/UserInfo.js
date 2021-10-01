@@ -10,9 +10,9 @@ export default class UserInfo {
 
   /** returns an object with information about the user. */
   getUserInfo() {
-    let obj = {}
-    obj['name'] = this._name.textContent;
-    obj['occupation'] = this._occupation.textContent;
+    let obj = {};
+    obj["name"] = this._name.textContent;
+    obj["occupation"] = this._occupation.textContent;
 
     return obj;
   }
@@ -25,5 +25,4 @@ export default class UserInfo {
     this._name.textContent = name;
     this._occupation.textContent = occupation;
   }
-
 }

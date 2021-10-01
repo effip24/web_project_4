@@ -8,10 +8,9 @@ const formSetting = {
 };
 
 const profile = document.querySelector(".profile");
-const profileName = profile.querySelector(".profile__name");
-const profileOccupation = profile.querySelector(".profile__occupation");
+const editProfileBtn = profile.querySelector(".profile__edit");
+const addPlaceBtn = profile.querySelector(".profile__add");
 
-const placesList = document.querySelector(".places__list");
 const places = [
   {
     title: "Yosemite Valley",
@@ -39,38 +38,23 @@ const places = [
   },
 ];
 
-const popups = document.querySelectorAll(".popup");
-
-const editPopup = document.querySelector('.popup_window_edit');
+const editPopup = document.querySelector(".popup_window_edit");
 const editPopupForm = editPopup.querySelector(".popup__form");
 const editPopupName = editPopup.querySelector(".popup__input_type_name");
 const editPopupOccupation = editPopup.querySelector(".popup__input_type_occupation");
 
-const addPopup = document.querySelector('.popup_window_add');
+const addPopup = document.querySelector(".popup_window_add");
 const addPopupForm = addPopup.querySelector(".popup__form");
-const addPopupTitle = addPopup.querySelector(".popup__input_type_title");
-const addPopupLink = addPopup.querySelector(".popup__input_type_link");
 const addPopupSubmit = addPopup.querySelector(".popup__submit");
 
-const imagePopup = document.querySelector(".popup_window_image");
-const image = imagePopup.querySelector(".popup__image");
-const description = imagePopup.querySelector(".popup__description");
-
-export  { 
-  formSetting, 
-  profile, 
-  profileName, 
-  profileOccupation, 
-  placesList, 
-  places, 
-  popups,  
-  editPopupForm, 
-  editPopupName, 
-  editPopupOccupation, 
-  addPopupForm, 
-  addPopupTitle, 
-  addPopupLink, 
+export {
+  formSetting,
+  editProfileBtn,
+  addPlaceBtn,
+  places,
+  editPopupForm,
+  editPopupName,
+  editPopupOccupation,
+  addPopupForm,
   addPopupSubmit,
-  image, 
-  description, 
-}
+};

@@ -70,10 +70,10 @@ export default class FormValidator {
    * @param inputList - the list of input fields to be checked.
    */
   _hasInvalidInput(inputList) {
-    return Array.from(inputList).some((input => {
+    return Array.from(inputList).some((input) => {
       //if at least one element has invalid input function returns true
       return !input.validity.valid;
-    }));
+    });
   }
 
   /** this function enables or disables a form's buttons according to the validity of the form's input fields

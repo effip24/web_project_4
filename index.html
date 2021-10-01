@@ -1,87 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Around The U.S.</title>
-</head>
-<body>
-  <div class="page">
-    <!-- header -->
-    <header class="header">
-      <img src="<%=require('./images/logo.svg')%>" alt="Around The U.S." class="header__logo">
-    </header>
-    <main class="content">
-      <!-- profile section  -->
-      <section class="profile">
-        <img src="<%=require('./images/avatar.jpg')%>" alt="profile avatar" class="profile__avatar">
-        <div class="profile__info">
-          <div class="profile__name-wrap">
-            <h1 class="profile__name">Jacques Cousteau</h1>
-            <button aria-label="edit" type="button" class="profile__edit"></button>
-          </div>
-          <p class="profile__occupation">Explorer</p>
-        </div>
-        <button aria-label="add" type="button" class="profile__add"></button>
-      </section>
-      
-      <!-- places section -->
-      <section class="places">
-        <!-- list of places each list item is a block of place -->
-        <ul class="places__list">
-        </ul>
-        <template id="place">
-          <li class="place">
-            <button class="place__delete"></button>
-            <img src="<%=require('./images/yosemite.jpg')%>" alt="bald" class="place__image">
-            <div class="place__description">
-              <h2 class="place__title"></h2>
-              <button aria-label="like" type="button" class="place__like place__like_theme_unlike"></button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Around The U.S.</title>
+  </head>
+  <body>
+    <div class="page">
+      <!-- header -->
+      <header class="header">
+        <img src="<%=require('./images/logo.svg')%>" alt="Around The U.S." class="header__logo" />
+      </header>
+      <main class="content">
+        <!-- profile section  -->
+        <section class="profile">
+          <img src="<%=require('./images/avatar.jpg')%>" alt="profile avatar" class="profile__avatar" />
+          <div class="profile__info">
+            <div class="profile__name-wrap">
+              <h1 class="profile__name">Jacques Cousteau</h1>
+              <button aria-label="edit" type="button" class="profile__edit"></button>
             </div>
-          </li>
-        </template>
-      </section>
+            <p class="profile__occupation">Explorer</p>
+          </div>
+          <button aria-label="add" type="button" class="profile__add"></button>
+        </section>
 
-      <!-- popup boxes -->
-      <div class="popup popup_window_edit">
-        <div class="popup__container">
-          <button aria-label="close" type="button" class="popup__close"></button>
-          <form name="edit" action="#" class="popup__form">
-            <h2 class="popup__title">Edit profile</h2>
-            <input id="name-input" novalidate required minlength="2" maxlength="40" name="name" type="text" placeholder="name" class="popup__input popup__input_type_name">
-            <span id="name-input-error" class="popup__input-error"></span>
-            <input id="occupation-input" novalidate required minlength="2" maxlength="200" name="occupation" type="text" placeholder="About me" class="popup__input popup__input_type_occupation">
-            <span id="occupation-input-error" class="popup__input-error"></span>
-            <button class="popup__submit" type="submit">Save</button>
-          </form>
+        <!-- places section -->
+        <section class="places">
+          <!-- list of places each list item is a block of place -->
+          <ul class="places__list"></ul>
+          <template id="place">
+            <li class="place">
+              <button class="place__delete"></button>
+              <img src="<%=require('./images/yosemite.jpg')%>" alt="bald" class="place__image" />
+              <div class="place__description">
+                <h2 class="place__title"></h2>
+                <button aria-label="like" type="button" class="place__like place__like_theme_unlike"></button>
+              </div>
+            </li>
+          </template>
+        </section>
+
+        <!-- popup boxes -->
+        <div class="popup popup_window_edit">
+          <div class="popup__container">
+            <button aria-label="close" type="button" class="popup__close"></button>
+            <form name="edit" action="#" class="popup__form">
+              <h2 class="popup__title">Edit profile</h2>
+              <input
+                id="name-input"
+                novalidate
+                required
+                minlength="2"
+                maxlength="40"
+                name="name"
+                type="text"
+                placeholder="name"
+                class="popup__input popup__input_type_name"
+              />
+              <span id="name-input-error" class="popup__input-error"></span>
+              <input
+                id="occupation-input"
+                novalidate
+                required
+                minlength="2"
+                maxlength="200"
+                name="occupation"
+                type="text"
+                placeholder="About me"
+                class="popup__input popup__input_type_occupation"
+              />
+              <span id="occupation-input-error" class="popup__input-error"></span>
+              <button class="popup__submit" type="submit">Save</button>
+            </form>
+          </div>
         </div>
-      </div>
-      <div class="popup popup_window_add">
-        <div class="popup__container">
-          <button aria-label="close" type="button" class="popup__close"></button>
-          <form name="add" action="#" class="popup__form">
-            <h2 class="popup__title">New place</h2>
-            <input id="title-input" novalidate required minlength="1" maxlength="30" name="title" type="text" placeholder="Title" class="popup__input popup__input_type_title">
-            <span id="title-input-error" class="popup__input-error"></span>
-            <input id="link-input" novalidate required name="link" type="url" placeholder="Image link" class="popup__input popup__input_type_link">
-            <span id="link-input-error" class="popup__input-error"></span>
-            <button class="popup__submit" type="submit">Create</button>
-          </form>
+        <div class="popup popup_window_add">
+          <div class="popup__container">
+            <button aria-label="close" type="button" class="popup__close"></button>
+            <form name="add" action="#" class="popup__form">
+              <h2 class="popup__title">New place</h2>
+              <input
+                id="title-input"
+                novalidate
+                required
+                minlength="1"
+                maxlength="30"
+                name="title"
+                type="text"
+                placeholder="Title"
+                class="popup__input popup__input_type_title"
+              />
+              <span id="title-input-error" class="popup__input-error"></span>
+              <input
+                id="link-input"
+                novalidate
+                required
+                name="link"
+                type="url"
+                placeholder="Image link"
+                class="popup__input popup__input_type_link"
+              />
+              <span id="link-input-error" class="popup__input-error"></span>
+              <button class="popup__submit" type="submit">Create</button>
+            </form>
+          </div>
         </div>
-      </div>
-      <div class="popup popup_window_image">
-        <div class="popup__container popup__container_type_image">
-          <button aria-label="close" type="button" class="popup__close popup__close_image"></button>
-          <img src="<%=require('./images/yosemite.jpg')%>" alt="bald" class="popup__image">
-          <p class="popup__description"></p>
+        <div class="popup popup_window_image">
+          <div class="popup__container popup__container_type_image">
+            <button aria-label="close" type="button" class="popup__close popup__close_image"></button>
+            <img src="<%=require('./images/yosemite.jpg')%>" alt="bald" class="popup__image" />
+            <p class="popup__description"></p>
+          </div>
         </div>
-      </div>
-    </main>
-    <!-- footer -->
-    <footer class="footer">
-      <p class="footer__author">&copy; 2021 Around The U.S.</p>
-    </footer>
-  </div>
-</body>
+      </main>
+      <!-- footer -->
+      <footer class="footer">
+        <p class="footer__author">&copy; 2021 Around The U.S.</p>
+      </footer>
+    </div>
+  </body>
 </html>

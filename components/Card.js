@@ -3,7 +3,7 @@ export default class Card {
    * @param {object} data - new card data, text and a link to the image.
    * @param {string} cardSelector - the selector of the template elemnt of a card.
    */
-  constructor({title, link}, cardSelector, handleCardClick) {
+  constructor({ title, link }, cardSelector, handleCardClick) {
     this._title = title;
     this._src = link;
     this._alt = "picture of " + title;
@@ -34,7 +34,13 @@ export default class Card {
   /** this function installs event listener to a new card */
   _setEventListeners() {
     this._card.addEventListener("click", (evt) => {
-      this._handleCardClick(evt);
+      if (evt.target.classList.contains("place__delete")) {
+        this._deleteCard();
+      } else if (evt.target.classList.contains("place__like")) {
+        this._toggleLikeCard(evt);
+      } else if (evt.target.classList.contains("place__image")) {
+        this._handleCardClick(evt);
+      }
     });
   }
 
