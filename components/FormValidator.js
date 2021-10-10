@@ -16,6 +16,7 @@ export default class FormValidator {
 
   /** this function starts a form validation. */
   enableValidation() {
+    this._formElement.querySelector(".popup__submit").classList.add("popup__submit_inactive");
     this._setEventListeners();
   }
 

@@ -1,0 +1,13 @@
+.popup__container_type_delete {
+  width: 100%;
+  max-width: 394px;
+  padding: 34px 36px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .popup__container_type_delete {
+    max-width: 238px;
+    padding: 25px 22px;
+  }
+}

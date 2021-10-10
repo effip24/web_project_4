@@ -15,13 +15,18 @@
       <main class="content">
         <!-- profile section  -->
         <section class="profile">
-          <img src="<%=require('./images/avatar.jpg')%>" alt="profile avatar" class="profile__avatar" />
+          <div class="profile__avatar-wrap">
+            <img src="<%=require('./images/avatar.jpg')%>" alt="profile avatar" class="profile__avatar" />
+            <div class="profile__avatar-overlay">
+              <img src="<%=require('./images/editProfile.svg')%>" alt="profile avatar" class="profile__avatar-edit" />
+            </div>
+          </div>
           <div class="profile__info">
             <div class="profile__name-wrap">
-              <h1 class="profile__name">Jacques Cousteau</h1>
+              <h1 class="profile__name"></h1>
               <button aria-label="edit" type="button" class="profile__edit"></button>
             </div>
-            <p class="profile__occupation">Explorer</p>
+            <p class="profile__occupation"></p>
           </div>
           <button aria-label="add" type="button" class="profile__add"></button>
         </section>
@@ -36,13 +41,42 @@
               <img src="<%=require('./images/yosemite.jpg')%>" alt="bald" class="place__image" />
               <div class="place__description">
                 <h2 class="place__title"></h2>
-                <button aria-label="like" type="button" class="place__like place__like_theme_unlike"></button>
+                <div class="place__like-wrap">
+                  <button aria-label="like" type="button" class="place__like place__like_theme_unlike"></button>
+                  <p class="place__like-counter">0</p>
+                </div>
               </div>
             </li>
           </template>
         </section>
 
         <!-- popup boxes -->
+        <div class="popup popup_window_avatar">
+          <div class="popup__container">
+            <button aria-label="close" type="button" class="popup__close"></button>
+            <form name="add" action="#" class="popup__form">
+              <h2 class="popup__title">Change profile picture</h2>
+              <input
+                id="link-input"
+                novalidate
+                required
+                name="link"
+                type="url"
+                placeholder="Image link"
+                class="popup__input popup__input_type_link"
+              />
+              <span id="link-input-error" class="popup__input-error"></span>
+              <button class="popup__submit" type="submit">Save</button>
+            </form>
+          </div>
+        </div>
+        <div class="popup popup_window_delete">
+          <div class="popup__container popup__container_type_delete">
+            <button aria-label="close" type="button" class="popup__close"></button>
+            <h2 class="popup__title">Are you sure?</h2>
+            <button class="popup__submit" type="button">Yes</button>
+          </div>
+        </div>
         <div class="popup popup_window_edit">
           <div class="popup__container">
             <button aria-label="close" type="button" class="popup__close"></button>
@@ -87,7 +121,7 @@
                 required
                 minlength="1"
                 maxlength="30"
-                name="title"
+                name="name"
                 type="text"
                 placeholder="Title"
                 class="popup__input popup__input_type_title"

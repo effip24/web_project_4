@@ -1,7 +1,7 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  /** constructor of PopupWithForm class
+  /** constructor of PopupWithForm class.
    * @param popupSelector - Css selector of a popup.
    * @param formSubmitHandler - a callback of the form submission.
    */
@@ -19,11 +19,10 @@ export default class PopupWithForm extends Popup {
     inputList.forEach((input) => {
       obj[input.name] = input.value;
     });
-
     return obj;
   }
 
-  /** this function adds a submit event listener */
+  /** this function adds a submit event listener. */
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
@@ -34,9 +33,21 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  /** this function resets the form once the popup is closed */
+  /** this function resets the form once the popup is closed .*/
   close() {
     super.close();
     this._form.reset();
+  }
+
+  /** this function renders saving state message to the user while a fetch request is in process.
+   * * @param isLoading - true - if the fetch request is in process, false - if the fetch request finished.
+   */
+  renderLoading(isLoading) {
+    const submitButton = this._popup.querySelector(".popup__submit");
+    if (isLoading) {
+      submitButton.textContent = "Saving...";
+    } else {
+      submitButton.textContent = "Save";
+    }
   }
 }
