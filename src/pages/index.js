@@ -171,11 +171,11 @@ const openEditPopUp = () => {
 
 // initializing user's info and places from the server.
 Promise.all([userInfoPromise, initialCardsPromise])
-  .then((result) => {
-    userInfo.setUserInfo({ name: result[0].name, occupation: result[0].about, id: result[0]._id });
-    userInfo.setAvatar(result[0].avatar);
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo({ name: userData.name, occupation: userData.about, id: userData._id });
+    userInfo.setAvatar(userData.avatar);
 
-    addToPlaces.renderItems(result[1]);
+    addToPlaces.renderItems(cards);
   })
   .catch((err) => {
     console.log(`failed to load data from the server ${err}`);
