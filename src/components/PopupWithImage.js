@@ -16,6 +16,6 @@ export default class PopupWithImage extends Popup {
   open(image) {
     super.open();
     this._image.src = image.src;
-    this._description.textContent = image.closest(".place").querySelector(".place__title").textContent;
+    this._description.textContent = image.alt;
   }
 }

@@ -1,6 +1,6 @@
 export default class Section {
   /** constructor of Section class.
-   * @param renderer - function responsible for creating and rendering data on a page.
+   * @param {renderer} - function responsible for creating and rendering data on a page.
    * @param {string} cardSelector -  CSS class selector of a container to add elemets to.
    */
   constructor({ renderer }, containerSelector) {
@@ -16,7 +16,9 @@ export default class Section {
   }
 
   /** this function will render each element on a page. */
-  renderItems() {
-    this._renderer();
+  renderItems(items) {
+    items.reverse().forEach((item) => {
+      this._renderer(item);
+    });
   }
 }

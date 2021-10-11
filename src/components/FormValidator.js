@@ -12,11 +12,12 @@ export default class FormValidator {
     this._inputError = settings.inputError;
     this._errorClass = settings.errorClass;
     this._formElement = formElement;
+    this._inputList = this._formElement.querySelectorAll(this._inputSelector);
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
   /** this function starts a form validation. */
   enableValidation() {
-    this._formElement.querySelector(".popup__submit").classList.add("popup__submit_inactive");
     this._setEventListeners();
   }
 
@@ -67,58 +68,47 @@ export default class FormValidator {
     }
   }
 
-  /** this function checks a list of input fields
+  /** this function checks a list of input fields.
    * @param inputList - the list of input fields to be checked.
    */
-  _hasInvalidInput(inputList) {
-    return Array.from(inputList).some((input) => {
+  _hasInvalidInput() {
+    return Array.from(this._inputList).some((input) => {
       //if at least one element has invalid input function returns true
       return !input.validity.valid;
     });
   }
 
-  /** this function enables or disables a form's buttons according to the validity of the form's input fields
-   * @param inputList - the list of input fields to be checked.
-   * @param buttonElement - the button element to toggle disable or enable state.
-   */
-  _toggleButtonState(inputList, buttonElement) {
+  /** this function enables or disables a form's buttons according to the validity of the form's input fields. */
+  _toggleButtonState() {
     // if one of the form's input field is invalid.
-    if (this._hasInvalidInput(inputList)) {
+    if (this._hasInvalidInput()) {
       // setting the button to be inactive.
-      buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.classList.add(this._inactiveButtonClass);
     } else {
       // all the field of the given form are valid, the button is active.
-      buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
     }
   }
 
-  /* this function installs input event listeners to the form */
+  /* this function installs input event listeners to the form. */
   _setEventListeners() {
-    // a list of input field inside formElement
-    const inputList = this._formElement.querySelectorAll(this._inputSelector);
-    const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-
     // iterating through inputList
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       // setting input listener to each input field in inputList
       inputElement.addEventListener("input", () => {
         this._isValid(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState();
       });
     });
   }
 
-  /* this function resets the input fields of the form  */
+  /* this function resets the input fields of the form. */
   resetFormValidation() {
-    // contains a list of input fields of a from.
-    const inputList = this._formElement.querySelectorAll(this._inputSelector);
-    // the submit button of the given form.
-    const submitButton = this._formElement.querySelector(this._submitButtonSelector);
     // iterating through the list.
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
       // reseting the submit button of the given form.
-      submitButton.classList.add(this._inactiveButtonClass);
+      this._buttonElement.classList.add(this._inactiveButtonClass);
     });
   }
 }

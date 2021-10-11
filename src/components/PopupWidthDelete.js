@@ -15,10 +15,7 @@ export default class PopupWidthDelete extends Popup {
     super.setEventListeners();
     this._popup.addEventListener("click", (evt) => {
       if (evt.target.textContent == "Yes") {
-        super.close();
-        this._deleteHandler(this._id);
-        this._card.remove();
-        this._card = null;
+        this._deleteHandler(this._id, this._card);
       }
     });
   }

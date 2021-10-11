@@ -11,7 +11,7 @@ export default class UserInfo {
 
   /** returns an object with information about the user. */
   getUserInfo() {
-    let obj = {};
+    const obj = {};
     obj["name"] = this._name.textContent;
     obj["occupation"] = this._occupation.textContent;
     obj["id"] = this._id;

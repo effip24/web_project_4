@@ -8,30 +8,25 @@ export default class Api {
     this._headers = headers;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  }
+
   /** this function returns the name and the about information from the server. */
   getUserInfo() {
-    return fetch(this._baseUrl + "/users/me", { headers: this._headers })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    return fetch(this._baseUrl + "/users/me", { headers: this._headers }).then((res) => {
+      return this._checkResponse(res);
+    });
   }
 
   /** this function returns the cards from the server. */
   getInitialCards() {
-    return fetch(this._baseUrl + "/cards", { headers: this._headers })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    return fetch(this._baseUrl + "/cards", { headers: this._headers }).then((res) => {
+      return this._checkResponse(res);
+    });
   }
 
   /** this function saves new user info on the server(name, about).
@@ -43,15 +38,9 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ name: name, about: about }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
   }
 
   /** this function saves new card on the server.
@@ -63,33 +52,21 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({ name: name, link: link }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
   }
 
   /** this function deletes a card from the server.
    * @param  cardId - the id of the deleted card.
    */
   deleteCard(cardId) {
-    fetch(this._baseUrl + "/cards/" + cardId, {
+    return fetch(this._baseUrl + "/cards/" + cardId, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
   }
 
   /** this function add a like to a card.
@@ -99,15 +76,9 @@ export default class Api {
     return fetch(this._baseUrl + "/cards/likes/" + cardId, {
       method: "PUT",
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
   }
 
   /** this function removes a like from a card.
@@ -117,15 +88,9 @@ export default class Api {
     return fetch(this._baseUrl + "/cards/likes/" + cardId, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
   }
 
   /** this function saves a user's avatar on the server.
@@ -136,14 +101,8 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar: link }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    }).then((res) => {
+      return this._checkResponse(res);
+    });
   }
 }

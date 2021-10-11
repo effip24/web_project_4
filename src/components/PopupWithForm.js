@@ -9,12 +9,13 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._formSubmitHandler = formSubmitHandler;
     this._form = this._popup.querySelector(".popup__form");
+    this._submitButton = this._popup.querySelector(".popup__submit");
   }
 
   /** this function collects data from all the input fields. */
   _getInputValues() {
     const inputList = this._popup.querySelectorAll(".popup__input");
-    let obj = {};
+    const obj = {};
 
     inputList.forEach((input) => {
       obj[input.name] = input.value;
@@ -29,7 +30,6 @@ export default class PopupWithForm extends Popup {
       evt.preventDefault();
 
       this._formSubmitHandler(this._getInputValues());
-      this.close();
     });
   }
 
@@ -43,11 +43,10 @@ export default class PopupWithForm extends Popup {
    * * @param isLoading - true - if the fetch request is in process, false - if the fetch request finished.
    */
   renderLoading(isLoading) {
-    const submitButton = this._popup.querySelector(".popup__submit");
     if (isLoading) {
-      submitButton.textContent = "Saving...";
+      this._submitButton.textContent = "Saving...";
     } else {
-      submitButton.textContent = "Save";
+      this._submitButton.textContent = "Save";
     }
   }
 }

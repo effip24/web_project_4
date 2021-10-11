@@ -27,6 +27,9 @@ const api = new Api({
   },
 });
 
+const userInfoPromise = api.getUserInfo();
+const initialCardsPromise = api.getInitialCards();
+
 const userInfo = new UserInfo({
   name: ".profile__name",
   occupation: ".profile__occupation",
@@ -41,6 +44,10 @@ const avatarEditPopup = new PopupWithForm({
       .updateProfilePicture(input.link)
       .then(() => {
         userInfo.setAvatar(input.link);
+        avatarEditPopup.close();
+      })
+      .catch((err) => {
+        console.log(`There was a problem updating the avatar ${err}`);
       })
       .finally(() => {
         avatarEditPopup.renderLoading(false);
@@ -55,6 +62,10 @@ const editProfilePopup = new PopupWithForm({
       .saveUserInfo(data.name, data.occupation)
       .then(() => {
         userInfo.setUserInfo(data);
+        editProfilePopup.close();
+      })
+      .catch((err) => {
+        console.log(`There was a problem updating profile information ${err}`);
       })
       .finally(() => {
         editProfilePopup.renderLoading(false);
@@ -69,6 +80,10 @@ const addPlacePopup = new PopupWithForm({
       .saveCard(data.name, data.link)
       .then((result) => {
         addToPlaces.addItem(createCard(result));
+        addPlacePopup.close();
+      })
+      .catch((err) => {
+        console.log(`There was a problem adding this place ${err}`);
       })
       .finally(() => {
         addPlacePopup.renderLoading(false);
@@ -77,8 +92,17 @@ const addPlacePopup = new PopupWithForm({
 });
 const deletePlacePopup = new PopupWidthDelete({
   popupSelector: ".popup_window_delete",
-  deleteHandler: (id) => {
-    api.deleteCard(id);
+  deleteHandler: (id, card) => {
+    api
+      .deleteCard(id)
+      .then(() => {
+        card.remove();
+        card = null;
+        deletePlacePopup.close();
+      })
+      .catch((err) => {
+        console.log(`There was a problem deleteing this place ${err}`);
+      });
   },
 });
 
@@ -88,17 +112,17 @@ const avatarEditFormValidator = new FormValidator(formSetting, avatarEditPopupFo
 const editProfileFormValidator = new FormValidator(formSetting, editPopupForm);
 const addPlaceFormValidator = new FormValidator(formSetting, addPopupForm);
 
-/** adds a new place to the places list in the DOM */
+/** adds a new place to the places list in the DOM. */
 const addToPlaces = new Section(
   {
-    rendere: (item) => {
+    renderer: (item) => {
       addToPlaces.addItem(createCard(item));
     },
   },
   ".places__list"
 );
 
-/** this function creates a new card
+/** this function creates a new card.
  * @param data - contains the link and the name of the new card.
  */
 const createCard = (data) => {
@@ -113,14 +137,24 @@ const createCard = (data) => {
       deletePlacePopup.open();
       deletePlacePopup.setDeleteCard(id, card);
     },
-    (like) => {
-      like
-        ? api.removeLike(data._id).then((result) => {
-            card.updateLikesCounter(result.likes.length);
-          })
-        : api.addLike(data._id).then((result) => {
-            card.updateLikesCounter(result.likes.length);
-          });
+    (like, evt) => {
+      !like
+        ? api
+            .removeLike(data._id)
+            .then((result) => {
+              card.updateLikes(result.likes.length, evt);
+            })
+            .catch((err) => {
+              console.log(`There was a problem removing the like ${err}`);
+            })
+        : api
+            .addLike(data._id)
+            .then((result) => {
+              card.updateLikes(result.likes.length, evt);
+            })
+            .catch((err) => {
+              console.log(`There was a problem adding the like ${err}`);
+            });
     }
   );
   const newPlace = card.generateCard();
@@ -135,18 +169,17 @@ const openEditPopUp = () => {
   editPopupOccupation.value = userInfo.getUserInfo().occupation;
 };
 
-// initializing user's info from the server.
-api.getUserInfo().then((result) => {
-  userInfo.setUserInfo({ name: result.name, occupation: result.about, id: result._id });
-  userInfo.setAvatar(result.avatar);
-});
+// initializing user's info and places from the server.
+Promise.all([userInfoPromise, initialCardsPromise])
+  .then((result) => {
+    userInfo.setUserInfo({ name: result[0].name, occupation: result[0].about, id: result[0]._id });
+    userInfo.setAvatar(result[0].avatar);
 
-// inizializing places from the server.
-api.getInitialCards().then((result) => {
-  result.reverse().forEach((place) => {
-    addToPlaces.addItem(createCard(place));
+    addToPlaces.renderItems(result[1]);
+  })
+  .catch((err) => {
+    console.log(`failed to load data from the server ${err}`);
   });
-});
 
 // popups listeners.
 avatarEditPopup.setEventListeners();

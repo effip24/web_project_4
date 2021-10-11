@@ -24,7 +24,7 @@ export default class Card {
     this._handleLikeClick = handleLikeClick;
   }
 
-  /** this function returns new template card. */
+  /** this function returns a new template card. */
   _getTemplate() {
     const cardTemplate = document.querySelector(`#${this._cardSelector}`).content;
     const card = cardTemplate.querySelector(`.${this._cardSelector}`).cloneNode(true);
@@ -59,10 +59,9 @@ export default class Card {
       if (evt.target.classList.contains("place__delete")) {
         this._handleDeleteClick(this._id, this._card);
       } else if (evt.target.classList.contains("place__like")) {
-        this._toggleLikeCard(evt.target);
         evt.target.classList.contains("place__like_theme_like")
-          ? this._handleLikeClick(false)
-          : this._handleLikeClick(true);
+          ? this._handleLikeClick(false, evt.target)
+          : this._handleLikeClick(true, evt.target);
       } else if (evt.target.classList.contains("place__image")) {
         this._handleImageClick(evt);
       }
@@ -76,7 +75,7 @@ export default class Card {
     }
   }
 
-  /** this function toggles the liked button's theme.
+  /** this function toggles the like button's theme.
    * @param likeBtn - the element that triggered the event.
    */
   _toggleLikeCard(likeBtn) {
@@ -91,10 +90,11 @@ export default class Card {
     });
   }
 
-  /** this function updates the like number of the card.
+  /** this function updates the number of likes of the card.
    * @param likes - up to date card's likes.
    */
-  updateLikesCounter(likes) {
+  updateLikes(likes, evt) {
+    this._toggleLikeCard(evt);
     this._card.querySelector(".place__like-counter").textContent = likes;
   }
 }

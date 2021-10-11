@@ -2,7 +2,7 @@
   "name": "web_project_4-main",
   "version": "1.0.0",
   "description": "### Overview * Intro * Figma * Technologies and Techniques * Github Pages",
-  "main": "index.js",
+  "main": "./src/pages/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve --mode development"
